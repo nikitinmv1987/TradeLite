@@ -16,7 +16,7 @@ namespace TradeLiteAppServer
         [WebInvoke(Method =  "GET",
             ResponseFormat = WebMessageFormat.Json,
             BodyStyle = WebMessageBodyStyle.Wrapped,
-            UriTemplate = "sayHello/{name}")]
-        string SayHello(string name);
+            UriTemplate = "findProduct/{name}")]
+        string FindProduct(string name);
     }
 }

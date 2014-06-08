@@ -1,20 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Web.Script.Serialization;
+using TradeLiteAppServer.Data;
 
 namespace TradeLiteAppServer
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "RestServiceImpl" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select RestServiceImpl.svc or RestServiceImpl.svc.cs at the Solution Explorer and start debugging.
     public class RestServiceImpl : IRestServiceImpl
     {
+        private const string connectionString = @"Data Source=(local);Initial Catalog=TradeLite;Uid=sa;Pwd=masterkey;";
+        private const string queryString = @"
+           SELECT 
+             P.ID,
+             PD.Name,
+             P.Size,
+             PD.Price
+           FROM Product P 
+             INNER JOIN ProductDictionary PD ON PD.ID = P.IDProduct 
+             INNER JOIN Store S ON S.ID = P.IDStore
+           WHERE 
+             P.State = 0 AND
+             PD.Name LIKE '%Armani%'";
 
-        public string SayHello(string name)
+        public string FindProduct(string name)
         {
-            return String.Format("Hello, {0}!", name);
+            string result;
+            try
+            {
+                var productList = new List<Product>();
+                using (var connection =
+                new SqlConnection(connectionString))
+                {
+                    var command = new SqlCommand(queryString, connection);
+                    command.Parameters.AddWithValue("@name", name);
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        productList.Add(new Product
+                        {
+                            Id = int.Parse(reader["ID"].ToString()),
+                            Name = reader["Name"].ToString(),
+                            Price = int.Parse(reader["Price"].ToString()),
+                            Size = reader["Size"].ToString()
+                        });
+                    }
+                    reader.Close();
+                    
+                    result = new JavaScriptSerializer().Serialize(productList);
+                }
+            }
+            catch (Exception exception)
+            {
+
+                result = exception.Message;
+            }
+            
+            return result;
         }
     }
 }
