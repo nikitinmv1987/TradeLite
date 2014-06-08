@@ -24,7 +24,7 @@ namespace TradeLiteAppServer
              INNER JOIN Store S ON S.ID = P.IDStore
            WHERE 
              P.State = 0 AND
-             PD.Name LIKE '%Armani%'";
+             PD.Name LIKE '%{0}%'";
 
         public string FindProduct(string name)
         {
@@ -35,8 +35,7 @@ namespace TradeLiteAppServer
                 using (var connection =
                 new SqlConnection(connectionString))
                 {
-                    var command = new SqlCommand(queryString, connection);
-                    command.Parameters.AddWithValue("@name", name);
+                    var command = new SqlCommand(String.Format(queryString, name), connection);                    
                     connection.Open();
                     var reader = command.ExecuteReader();
 
