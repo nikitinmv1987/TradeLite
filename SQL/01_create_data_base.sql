@@ -1,19 +1,10 @@
 USE [master]
 GO
 
--- ********** For Development ************
 CREATE DATABASE [TradeLite] ON  PRIMARY 
 ( NAME = N'TradeLite_Data', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\TradeLite_Data.mdf' , SIZE = 1048576KB , MAXSIZE = 2097152KB , FILEGROWTH = 262144KB  )
  LOG ON 
 ( NAME = N'TradeLite_Log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL10_50.MSSQLSERVER\MSSQL\DATA\TradeLite_Log.ldf' ,  SIZE = 524288KB , MAXSIZE = 1048576KB , FILEGROWTH = 262144KB)
--- ********** For Development ************
-
--- ********** For Halyk ************
---CREATE DATABASE [TradeLite] ON  PRIMARY 
---( NAME = N'TradeLite_Data', FILENAME = N'E:\MSSQL\Data\TradeLite_Data.mdf' , SIZE = 1048576KB , MAXSIZE = 2097152KB , FILEGROWTH = 262144KB  )
--- LOG ON 
---( NAME = N'TradeLite_Log', FILENAME = N'E:\MSSQL\Data\TradeLite_Log.ldf' ,  SIZE = 524288KB , MAXSIZE = 1048576KB , FILEGROWTH = 262144KB)
--- ********** For Halyk ************
 
 GO
 ALTER DATABASE [TradeLite] SET COMPATIBILITY_LEVEL = 100
