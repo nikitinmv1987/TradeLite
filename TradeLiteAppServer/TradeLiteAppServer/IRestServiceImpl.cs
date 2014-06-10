@@ -17,5 +17,13 @@ namespace TradeLiteAppServer
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "findProduct/{name}")]
         string FindProduct(string name);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+            UriTemplate = "/AddProduct?name={name}&size={size}&price={price}",
+            //RequestFormat = WebMessageFormat.Json,
+            //ResponseFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare)]
+        void AddProduct(string name, string size, int price);
     }
 }

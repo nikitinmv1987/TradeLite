@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Web.Script.Serialization;
 using TradeLiteAppServer.Data;
@@ -8,7 +9,8 @@ namespace TradeLiteAppServer
 {
   public class RestServiceImpl : IRestServiceImpl
   {
-    private const string ConnectionString = @"Data Source=(local);Initial Catalog=TradeLite;Uid=sa;Pwd=masterkey;";
+    //private const string ConnectionString = @"Data Source=(local);Initial Catalog=TradeLite;Uid=sa;Pwd=masterkey;";
+    private const string ConnectionString = @"Data Source=(local); Initial Catalog=TradeLite; Integrated Security=SSPI;";
     private const string QueryString = @"
       SELECT 
         P.ID,
@@ -24,7 +26,6 @@ namespace TradeLiteAppServer
 
     public string FindProduct(string name)
     {
-      string result;
       try
       {
         var productList = new List<Product>();
@@ -46,15 +47,37 @@ namespace TradeLiteAppServer
             });
           }
           reader.Close();
-          result = new JavaScriptSerializer().Serialize(productList);
+          return new JavaScriptSerializer().Serialize(productList);
         }
       }
       catch (Exception exception)
       {
-        result = exception.Message;
+        return exception.Message;
       }
+    }
 
-      return result;
+    private const string CMD_PROD_DICT_INS = "tl_InsProductDictionary";
+    public void AddProduct(string name, string size, int price)
+    {
+        using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+        {
+            using (SqlCommand command = new SqlCommand(CMD_PROD_DICT_INS, sqlConnection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Name", name);
+                command.Parameters.AddWithValue("@Price", price);
+
+                sqlConnection.Open();
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
+        }
     }
   }
 }
