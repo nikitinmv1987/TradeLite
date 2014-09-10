@@ -8,12 +8,12 @@ INSERT INTO Store(Name) VALUES ('Магазин');
 --------------------------
 
 ------- ProductDictionary ------------
-INSERT INTO ProductDictionary(Name, Price) VALUES('Юбка Armani синяя',              350);
-INSERT INTO ProductDictionary(Name, Price) VALUES('Юбка Armani красная',            300);
-INSERT INTO ProductDictionary(Name, Price) VALUES('Юбка Armani зеленая',            300);
-INSERT INTO ProductDictionary(Name, Price) VALUES('Куртка City Classic коричневая', 500);
-INSERT INTO ProductDictionary(Name, Price) VALUES('Куртка City Classic зеленая',    500);
-INSERT INTO ProductDictionary(Name, Price) VALUES('Куртка City Classic красная',    450);
+INSERT INTO tlProductDictionary(Name, Price) VALUES('Юбка Armani синяя',              350);
+INSERT INTO tlProductDictionary(Name, Price) VALUES('Юбка Armani красная',            300);
+INSERT INTO tlProductDictionary(Name, Price) VALUES('Юбка Armani зеленая',            300);
+INSERT INTO tlProductDictionary(Name, Price) VALUES('Куртка City Classic коричневая', 500);
+INSERT INTO tlProductDictionary(Name, Price) VALUES('Куртка City Classic зеленая',    500);
+INSERT INTO tlProductDictionary(Name, Price) VALUES('Куртка City Classic красная',    450);
 --------------------------------------
 
 ------- Product ------------
