@@ -43,7 +43,7 @@ AS BEGIN
     ,DUP_insTime
     ,DUP_Action
     ,DUP_UserName
-    ,DUP_HostName       
+    ,DUP_HostName
     ,DUP_AplicationName
     ,HIID
     ,pdID
@@ -51,25 +51,25 @@ AS BEGIN
     ,Price
     ,CreateAt
     ,CreateBy
-		,EditAt
-		,EditBy
+    ,EditAt
+    ,EditBy
     ,Note
   )
   select
-     OLD_HIID								= NULL
-    ,DUP_insTime						= GETDATE()
-    ,DUP_action							= 'I'
-    ,DUP_UserName						= @UserName
-    ,DUP_HostName						= @HostName
-    ,DUP_AplicationName			= @ProgName
+     OLD_HIID               = NULL
+    ,DUP_insTime            = GETDATE()
+    ,DUP_action             = 'I'
+    ,DUP_UserName           = @UserName
+    ,DUP_HostName           = @HostName
+    ,DUP_AplicationName     = @ProgName
     ,i.HIID
     ,i.pdID
     ,i.Name
     ,i.Price
     ,i.CreateAt
     ,i.CreateBy
-		,i.EditAt
-		,i.EditBy
+    ,i.EditAt
+    ,i.EditBy
     ,i.Note
   from Inserted i
   --
@@ -119,25 +119,25 @@ AS BEGIN
     ,Price
     ,CreateAt
     ,CreateBy
-		,EditAt
-		,EditBy
+    ,EditAt
+    ,EditBy
     ,Note
   )
   select
-     OLD_HIID								= d.HIID
-    ,DUP_insTime						= GETDATE()
-    ,DUP_Action							= 'U'
-    ,DUP_UserName						= @UserName
-    ,DUP_HostName						= @HostName
-    ,DUP_AplicationName			= @ProgName    
+     OLD_HIID               = d.HIID
+    ,DUP_insTime            = GETDATE()
+    ,DUP_Action             = 'U'
+    ,DUP_UserName           = @UserName
+    ,DUP_HostName           = @HostName
+    ,DUP_AplicationName     = @ProgName
     ,i.HIID
     ,i.pdID
     ,i.Name
     ,i.Price
     ,i.CreateAt
     ,i.CreateBy
-		,i.EditAt
-		,i.EditBy
+    ,i.EditAt
+    ,i.EditBy
     ,i.Note
   from Inserted i
     inner join Deleted d on i.pdID = d.pdID
@@ -145,7 +145,7 @@ AS BEGIN
   if @@ERROR <> 0
   begin
     RAISERROR(60004, 16, 10, 'DUP_tlProductDictionary') WITH SETERROR
-    ROLLBACK TRAN    
+    ROLLBACK TRAN
     RETURN
   end
   --
@@ -182,31 +182,31 @@ AS BEGIN
     ,DUP_UserName
     ,DUP_HostName       
     ,DUP_AplicationName
-		,HIID
+    ,HIID
     ,pdID
     ,Name
     ,Price
     ,CreateAt
     ,CreateBy
-		,EditAt
-		,EditBy
+    ,EditAt
+    ,EditBy
     ,Note
   )
   select
-     OLD_HIID								= d.HIID
-    ,DUP_insTime						= GETDATE()
-    ,DUP_action							= 'D'
-    ,DUP_UserName						= @UserName
-    ,DUP_HostName						= @HostName
-    ,DUP_AplicationName			= @ProgName   
+     OLD_HIID               = d.HIID
+    ,DUP_insTime            = GETDATE()
+    ,DUP_action             = 'D'
+    ,DUP_UserName           = @UserName
+    ,DUP_HostName           = @HostName
+    ,DUP_AplicationName     = @ProgName
     ,d.HIID
     ,d.pdID
     ,d.Name
     ,d.Price
     ,d.CreateAt
     ,d.CreateBy
-		,d.EditAt
-		,d.EditBy
+    ,d.EditAt
+    ,d.EditBy
     ,d.Note
   from Deleted d
   --

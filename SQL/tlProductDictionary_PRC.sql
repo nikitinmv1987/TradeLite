@@ -35,16 +35,16 @@ CREATE PROCEDURE [dbo].[tl_GetProductDictionary]
 AS BEGIN
   SET NOCOUNT ON
 
-	select
-		 [pdID]
+  select
+     [pdID]
     ,[Name]
     ,[Price]
-		,[CreateAt]
-		,[CreateBy]
-		,[EditAt]
-		,[EditBy]
-		,[Note]
-	from tlProductDictionary
+    ,[CreateAt]
+    ,[CreateBy]
+    ,[EditAt]
+    ,[EditBy]
+    ,[Note]
+  from tlProductDictionary
 
   if @@ERROR <> 0
   begin
@@ -65,10 +65,10 @@ GO
   Last   : Ковбаса С.Ф. / 10.06.2014
 */
 CREATE PROCEDURE [dbo].[tl_UpdProductDictionary]
-   @pdID		int						-- ID записи
-	,@Name		nvarchar(255)	-- Название продукта
-	,@Price		int						-- Цена
-	,@Note		nvarchar(255) -- Примечание
+   @pdID    int           -- ID записи
+  ,@Name    nvarchar(255) -- Название продукта
+  ,@Price   int           -- Цена
+  ,@Note    nvarchar(255) -- Примечание
 AS BEGIN
   SET NOCOUNT ON
 
@@ -85,11 +85,11 @@ AS BEGIN
   end
 
 	update tlProductDictionary set
-		 [Name]			= @Name
-		,[Price]		= @Price
-		,[EditBy]		= dbo.Cm_GetLoginName()
+     [Name]     = @Name
+    ,[Price]    = @Price
+    ,[EditBy]   = dbo.Cm_GetLoginName()
     ,[EditAt]   = GETDATE()
-		,[Note]			= @Note
+    ,[Note]     = @Note
 	where pdID = @pdID
 
   if @@ERROR <> 0
@@ -111,18 +111,18 @@ GO
   Last   : Ковбаса С.Ф. / 10.06.2014
 */
 CREATE PROCEDURE [dbo].[tl_DelProductDictionary]
-   @pdID			int		-- ID записи
+   @pdID    int -- ID записи
 AS BEGIN
   SET NOCOUNT ON
-	
+
   if @pdID is NULL
   begin
     RAISERROR('Параметр "%s" должен иметь значение', 16, 10, 'ID записи') WITH SETERROR
     RETURN -1
   end
 
-	delete from tlProductDictionary
-	where pdID = @pdID
+  delete from tlProductDictionary
+  where pdID = @pdID
 
   if @@ERROR <> 0
   begin
@@ -143,9 +143,9 @@ GO
   Last   : Ковбаса С.Ф. / 10.06.2014
 */
 CREATE PROCEDURE [dbo].[tl_InsProductDictionary]
-   @Name		nvarchar(255)	-- Название продукта
-	,@Price		int						-- Цена
-	,@Note		nvarchar(255) -- Примечание
+   @Name  nvarchar(255) -- Название продукта
+  ,@Price int           -- Цена
+  ,@Note  nvarchar(255) -- Примечание
 AS BEGIN
   SET NOCOUNT ON
   
@@ -155,19 +155,19 @@ AS BEGIN
     RETURN -1
   end
 
-	insert into tlProductDictionary(
+  insert into tlProductDictionary(
      [Name]
     ,[Price]
-		,[CreateBy]
+    ,[CreateBy]
     ,[CreateAt] 
-		,[Note]
+    ,[Note]
   )
   values (
      @Name
     ,@Price
-		,dbo.Cm_GetLoginName()
-		,GETDATE()
-		,@Note
+    ,dbo.Cm_GetLoginName()
+    ,GETDATE()
+    ,@Note
   )
 
   if @@ERROR <> 0
@@ -200,17 +200,17 @@ AS BEGIN
     RETURN -1
   end
 
-	set @Name = '%' + @Name + '%'
+  set @Name = '%' + @Name + '%'
 
-	select
-		 p.ID
+  select
+     p.ID
     ,pd.Name
     ,p.Size
-		,pd.Price
-	from Product p 
-		inner join tlProductDictionary pd on pd.pdID = p.IDProduct 
+    ,pd.Price
+  from Product p 
+    inner join tlProductDictionary pd on pd.pdID = p.IDProduct 
     inner join Store s on s.ID = p.IDStore
-	where p.[State] = 0 and pd.Name LIKE @Name 
+  where p.[State] = 0 and pd.Name LIKE @Name 
 
   if @@ERROR <> 0
   begin

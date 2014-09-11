@@ -15,15 +15,15 @@ GO
   Last   :  овбаса —.‘. / 2014-09-10
 */
 CREATE TABLE [dbo].[tlProductDictionary] (
-   [HIID]         timestamp					NOT NULL -- ¬ерси€
-  ,[pdID]					int IDENTITY(1,1)	NOT NULL -- ID записи
-	,[Name]         nvarchar(255)			NOT NULL -- название
-  ,[Price]        int										NULL -- цена
-  ,[CreateAt]			datetime					NOT NULL -- дата создани€
-  ,[CreateBy]     nvarchar(255)					NULL -- кто создал
-	,[EditAt]				datetime					NOT NULL -- дата редактировани€
-	,[EditBy]				nvarchar(255)					NULL -- кто редактировал
-  ,[Note]         nvarchar(255)					NULL -- примечание
+     [HIID]         timestamp           NOT NULL -- ¬ерси€
+    ,[pdID]         int IDENTITY(1,1)   NOT NULL -- ID записи
+    ,[Name]         nvarchar(255)       NOT NULL -- название
+    ,[Price]        int                     NULL -- цена
+    ,[CreateAt]     datetime            NOT NULL -- дата создани€
+    ,[CreateBy]     nvarchar(255)           NULL -- кто создал
+    ,[EditAt]       datetime            NOT NULL -- дата редактировани€
+    ,[EditBy]       nvarchar(255)           NULL -- кто редактировал
+    ,[Note]         nvarchar(255)           NULL -- примечание
 ) ON [PRIMARY]
 GO
 
@@ -52,21 +52,21 @@ GO
   Last   :  овбаса —.‘. / 2014-09-10
 */
 CREATE TABLE [dbo].[DUP_tlProductDictionary] (
-   [OLD_HIID]						binary(8)					NULL	-- стара€ верси€
-  ,[DUP_insTime]				datetime			NOT NULL	-- врем€ изменени€
-  ,[DUP_action]					char(1)				NOT NULL	-- действие
-  ,[DUP_UserName]				varchar(30)		NOT NULL	-- пользователь	
-	,[DUP_HostName]				varchar(128)	NOT NULL	-- хост
-	,[DUP_AplicationName] varchar(128)	NOT NULL  -- им€ приложени€
-  ,[HIID]								binary(8)			NOT NULL	-- ¬ерси€
-  ,[pdID]								int						NOT NULL	-- ID записи
-	,[Name]								nvarchar(255)	NOT NULL	-- название
-  ,[Price]							int								NULL	-- цена
-  ,[CreateAt]						datetime			NOT NULL -- дата создани€
-  ,[CreateBy]						nvarchar(255)			NULL -- кто создал
-	,[EditAt]							datetime			NOT NULL -- дата редактировани€
-	,[EditBy]							nvarchar(255)			NULL -- кто редактировал
-  ,[Note]								nvarchar(255)			NULL	-- примечание
+     [OLD_HIID]             binary(8)           NULL  -- стара€ верси€
+    ,[DUP_insTime]          datetime        NOT NULL  -- врем€ изменени€
+    ,[DUP_action]           char(1)         NOT NULL  -- действие
+    ,[DUP_UserName]         varchar(30)     NOT NULL  -- пользователь	
+    ,[DUP_HostName]         varchar(128)    NOT NULL  -- хост
+    ,[DUP_AplicationName]   varchar(128)    NOT NULL  -- им€ приложени€
+    ,[HIID]                 binary(8)       NOT NULL  -- ¬ерси€
+    ,[pdID]                 int             NOT NULL  -- ID записи
+    ,[Name]                 nvarchar(255)   NOT NULL  -- название
+    ,[Price]                int                 NULL  -- цена
+    ,[CreateAt]             datetime        NOT NULL  -- дата создани€
+    ,[CreateBy]             nvarchar(255)       NULL  -- кто создал
+    ,[EditAt]               datetime        NOT NULL  -- дата редактировани€
+    ,[EditBy]               nvarchar(255)       NULL  -- кто редактировал
+    ,[Note]                 nvarchar(255)       NULL  -- примечание
 ) ON [PRIMARY]
 GO
 
